@@ -4,6 +4,7 @@
   "description": "A Pokemon battle simulator.",
   "main": "./pokemon-showdown",
   "dependencies": {
+    "esbuild": "^0.17.0",
     "sockjs": "^0.3.24",
     "ws": "^8.13.0"
   },
