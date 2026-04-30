@@ -5,15 +5,9 @@
   "main": "./pokemon-showdown",
   "dependencies": {
     "sockjs": "^0.3.24",
-    "ws": "^8.13.0",
-    "zlib": "^1.0.5"
+    "ws": "^8.13.0"
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/smogon/pokemon-showdown.git"
   }
 }
-
