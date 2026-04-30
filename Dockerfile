@@ -1,20 +1,19 @@
-# Node 20 is modern and will NOT have the "exit code 100" error
-FROM node:20-slim
+FROM node:16-slim
 
 WORKDIR /app
 
 # Install git
 RUN apt-get update && apt-get install -y git
 
-# Grab the stable Gen 7 code (late 2018)
+# Move back to late 2015 (The original Gen 6 era)
 RUN git clone https://github.com/smogon/pokemon-showdown.git . && \
-    git checkout $(git rev-list -n 1 --before="2018-12-01" master)
+    git checkout d7a5b3a
 
-# Install and build
+# Install only the basic needs
 RUN npm install --production
-RUN node build
 
+# This version is so old it doesn't need "node build"!
 EXPOSE 10000
 
-# Start command
-CMD ["node", "pokemon-showdown", "start", "--no-security", "--port", "10000"]
+# The command is also simpler for this version
+CMD ["node", "pokemon-showdown", "10000"]
