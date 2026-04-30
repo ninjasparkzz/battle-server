@@ -1,11 +1,12 @@
-FROM node:14-slim
+# We use Node 20 (modern and stable)
+FROM node:20-slim
 
 WORKDIR /app
 
-# Install git
+# Install git (this will work now)
 RUN apt-get update && apt-get install -y git
 
-# Clone the repo and move back to the year 2016 (Gen 6 era)
+# Grab the Gen 6 code from early 2016
 RUN git clone https://github.com/smogon/pokemon-showdown.git . && \
     git checkout $(git rev-list -n 1 --before="2016-01-01" master)
 
