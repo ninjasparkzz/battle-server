@@ -1,4 +1,5 @@
-FROM node:16-slim
+# Node 20 is modern and will NOT have the "exit code 100" error
+FROM node:20-slim
 
 WORKDIR /app
 
