@@ -1,20 +1,9 @@
 FROM node:20-slim
-
 WORKDIR /app
-
-# Install dependencies
-COPY package*.json ./
-RUN npm install --production
-
-# Copy all files
 COPY . .
-
-# Build the server
+# Using --no-optional and --no-audit to save RAM during build
+RUN npm install --production --no-optional --no-audit
 RUN node build
-
-# Use Port 8080 for Back4App
-ENV PORT=8080
-EXPOSE 8080
-
-# Start command: --no-security is key to bypassing proxy/login locks
-CMD ["node", "pokemon-showdown", "start", "--no-security", "--port", "8080"]
+EXPOSE 10000
+# Force-disabling subprocesses in the start command as a backup
+CMD ["node", "pokemon-showdown", "start", "--no-security", "--port", "10000"]
