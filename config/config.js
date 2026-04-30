@@ -1,61 +1,26 @@
 'use strict';
-
-/**
- * The server port - Modified for Back4App/Cloud support
- */
-exports.port = process.env.PORT || 8000;
-
-/**
- * The server address
- */
+exports.port = process.env.PORT || 10000;
 exports.bindaddress = '0.0.0.0';
-
-/**
- * PROXY LOCK BYPASS
- * This allows users to connect from hosting provider IPs (like Back4App/Render)
- */
 exports.permissiveproxy = true;
 exports.noproxylookups = true;
-
-/**
- * RAM OPTIMIZATION
- * Set to 0 to disable subprocesses and save memory on the 256MB free tier.
- */
+// RAM LIMIT FIX
 exports.subprocesses = 0;
-
-/**
- * ADMIN ACCESS
- * Replace 'your_name' with your actual Pokemon Showdown username.
- */
-exports.developers = ['sparkzzninja'];
-
-/**
- * wsdeflate - compresses WebSocket messages
- */
+exports.workerprocesses = 0;
+exports.reportjoins = false;
+exports.reportbattles = false;
+exports.reportbattlejoins = false;
+// ADMIN ACCESS (Put your name here)
+exports.developers = ['your_name'];
+// OTHER SETTINGS
 exports.wsdeflate = null;
-
 exports.lazysockets = false;
-
 exports.ssl = null;
-
 exports.proxyip = false;
-
-/**
- * Various debug options
- */
 exports.ofemain = false;
 exports.ofesockets = false;
-exports.debugsimprocesses = true;
-exports.debugvalidatorprocesses = true;
-exports.debugdexsearchprocesses = true;
-
+exports.debugsimprocesses = false;
 exports.potd = '';
-
 exports.crashguard = true;
-
-/**
- * Login server data
- */
 exports.loginserver = 'http://play.pokemonshowdown.com/';
 exports.loginserverkeyalgo = "RSA-SHA1";
 exports.loginserverpublickeyid = 4;
@@ -72,120 +37,24 @@ RMmQlQ6RMZNr6sf9pYMDhh2UjU11++8aUxBaso8zeSXC9hhp7mAa7OTxts1t3X57
 RhlSYTL4lXnj/eOa23yaqxRihS2MT9EZ7jNd3WVWlWgExIS2kVyZhL48VA6rXDqr
 Ko0LaPAMhcfETxlFQFutoWBRcH415A/EMXJa4FqYa9oeXWABNtKkUW0zrQ194btg
 Y929lRybWEiKUr+4Yw2O1W0CAwEAAQ==
------END PUBLIC KEY-----
-`;
-
+-----END PUBLIC KEY-----`;
 exports.routes = {
 	root: 'pokemonshowdown.com',
 	client: 'play.pokemonshowdown.com',
 	dex: 'dex.pokemonshowdown.com',
 	replays: 'replay.pokemonshowdown.com',
 };
-
-exports.crashguardemail = null;
-
-exports.disablebasicnamefilter = false;
-
-exports.allowrequestingties = true;
-
-exports.reportjoins = true;
-
-exports.reportjoinsperiod = 0;
-
-exports.reportbattles = false; // Set to false to save RAM
-
-exports.reportbattlejoins = true;
-
-exports.monitorminpunishments = 3;
-
-exports.nothrottle = false;
-
-exports.noipchecks = false;
-
-exports.nobattlesearch = false;
-
-exports.punishmentautolock = false;
-
-exports.restrictLinks = false;
-
-exports.chatmodchat = false;
-exports.battlemodchat = false;
-exports.pmmodchat = false;
-exports.laddermodchat = false;
-
-exports.forcetimer = false;
-
-exports.forceregisterelo = false;
-
-exports.backdoor = true;
-
-exports.consoleips = ['127.0.0.1'];
-
-exports.watchconfig = true;
-
-exports.logchat = false;
-
-exports.logchallenges = false;
-
-exports.loguserstats = 1000 * 60 * 10; 
-
 exports.inactiveuserthreshold = 1000 * 60 * 60;
-
 exports.autolockdown = true;
-
 exports.noguestsecurity = false;
-
-exports.tourroom = '';
-exports.tourannouncements = [];
-exports.tourdefaultplayercap = 0;
-exports.ratedtours = false;
-
-exports.appealurl = '';
-
-exports.repl = true;
-exports.replsocketprefix = './logs/repl/';
-exports.replsocketmode = 0o600;
-
-exports.disablehotpatchall = false;
-
-exports.forcedpublicprefixes = [];
-
-exports.startuphook = function () {};
-
-exports.lastfmkey = '';
-
-exports.chatlogreader = 'fs';
-
-// Keeping your Group List as is
+exports.repl = false;
+exports.watchconfig = false;
 exports.grouplist = [
-	{
-		symbol: '~',
-		id: "admin",
-		name: "Administrator",
-		inherit: '@',
-		jurisdiction: 'u',
-		globalonly: true,
-		console: true,
-		bypassall: true,
-		lockdown: true,
-		promote: '~u',
-		roomowner: true,
-		roombot: true,
-		roommod: true,
-		roomdriver: true,
-		forcewin: true,
-		declare: true,
-		addhtml: true,
-		rangeban: true,
-		makeroom: true,
-		editroom: true,
-		editprivacy: true,
-		potd: true,
-		disableladder: true,
-		gdeclare: true,
-		gamemanagement: true,
-		exportinputlog: true,
-		tournaments: true,
-	},
-    // ... (rest of your groups here)
+	{symbol: '~', id: "admin", name: "Administrator", root: true},
+	{symbol: '#', id: "owner", name: "Room Owner", inherit: '@'},
+	{symbol: '@', id: "mod", name: "Moderator", inherit: '%'},
+	{symbol: '%', id: "driver", name: "Driver", inherit: '+'},
+	{symbol: '+', id: "voice", name: "Voice", inherit: ' '},
+	{symbol: ' ', ipself: true}
 ];
+
